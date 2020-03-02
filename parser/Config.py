@@ -1,4 +1,4 @@
 # File path info
-relPath = "test/"
+relPath = "tests/"
 name = "test_plasmids.gfa"
 FILE_PATH = relPath + name
