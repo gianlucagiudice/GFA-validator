@@ -35,12 +35,12 @@ optionalFields = {
 # Parsing dictionary
 parsingDict = {
     # Comment
-    '#': {'required': ('.*', 'Comment'),
+    '#': {'required': [('.*', 'Comment')],
           'optional': {}
           },
     # Segment
-    'S': {'required': ((nameRegexp, 'Segment name'),
-                       (sequenceRegexp, 'Optional nucleotide sequence')),
+    'S': {'required': [(nameRegexp, 'Name of segment'),
+                       (sequenceRegexp, 'Optional nucleotide sequence')],
           'optional': {'LN': optionalFields['LN'],
                        'RC': optionalFields['RC'],
                        'FC': optionalFields['FC'],
@@ -49,11 +49,11 @@ parsingDict = {
                        'UR': optionalFields['UR']}
           },
     # Link
-    'L': {'required': ((nameRegexp, 'Name of segment'),
+    'L': {'required': [(nameRegexp, 'Name of segment'),
                        (orientationRegexp, 'Orientation of From segment'),
                        (nameRegexp, 'Name of segment'),
                        (orientationRegexp, 'Orientation of To segment'),
-                       (cigarRegexp, 'Optional CIGAR string describing overlap')),
+                       (cigarRegexp, 'Optional CIGAR string describing overlap')],
           'optional': {'MQ': optionalFields['MQ'],
                        'NM': optionalFields['NM'],
                        'RC': optionalFields['RC'],
@@ -62,20 +62,20 @@ parsingDict = {
                        'ID': optionalFields['ID']}
           },
     # Containment
-    'C': {'required': ((nameRegexp, 'Name of container segment'),
+    'C': {'required': [(nameRegexp, 'Name of container segment'),
                        (orientationRegexp, 'Orientation of container segment'),
                        (nameRegexp, 'Name of contained segment'),
                        (orientationRegexp, 'Orientation of contained segment'),
                        (integerRegexp, '0-based start of contained segment'),
-                       (cigarRegexp, 'CIGAR string describing overlap')),
+                       (cigarRegexp, 'CIGAR string describing overlap')],
           'optional': {'RC': optionalFields['RC'],
                        'NM': optionalFields['NM'],
                        'ID': optionalFields['ID']}
           },
     # Path
-    'P': {'required': ((nameRegexp, 'Path name'),
+    'P': {'required': [(nameRegexp, 'Path name'),
                        (nameRegexp, 'A comma-separated list of segment names and orientations'),
-                       (cigarRegexp, 'Optional comma-separated list of CIGAR strings')),
+                       (cigarRegexp, 'Optional comma-separated list of CIGAR strings')],
           'optional': {}
           }
 }
