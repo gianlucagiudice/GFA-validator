@@ -1,5 +1,5 @@
-from parser.Parser import Parser
 from parser.Config import FILE_PATH
+from parser.Parser import Parser
 
 
 def main():
@@ -7,11 +7,15 @@ def main():
     lines = readFile(FILE_PATH)
     # Create parser object
     parser = Parser(lines)
-    # Parse each line
-    parsed_lines = parser.parse()
-    # Filter valid lines
-    #invalid_lines = validated_lines
+    # Compute errors
+    errors = [line.parsingError for line in parser.parse() if line.parsingError]
     # Print results
+    if not errors:
+        print("File is valid.")
+    else:
+        [print(error, end='') for error in errors]
+        print("\nFile is not valid.")
+
 
 def readFile(path):
     with open(path) as file:
