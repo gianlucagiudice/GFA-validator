@@ -8,7 +8,7 @@ class LineParser:
         # Number of line in file
         self.lineNumber = line_number
         # Content of line
-        self.line = line.strip()
+        self.line = line
         # Set of optional fields occurrence
         self.optionalFieldsSet = set()
         # Parsing error
@@ -17,23 +17,27 @@ class LineParser:
     def parse(self, parsing_dict):
         # Skip blank line
         if len(self.line) == 0:
-            return
+            return self
         # Extract tag and tokens
         tag, *tokens = self.line.split('\t')
         # Check if tag is valid
         if tag not in parsing_dict.keys():
-            return self.buildError([], tag, tokens, 'record type')
+            self.buildError([], tag, tokens, 'record type')
+            return self
         # Parse required fields
         self.parseRequiredFields(tag, tokens, parsing_dict)
-        # Parse optional fields
-        self.parseOptionalFields(tag, tokens, parsing_dict)
+        # Check if line is valid so far
+        if self.parsingError is None:
+            # Parse optional fields
+            self.parseOptionalFields(tag, tokens, parsing_dict)
+        # Return parsed line
+        return self
 
     def parseRequiredFields(self, tag, tokens, parsing_dict):
         required_fields_list = parsing_dict[tag]['required']
         # Check if all required fields are present
         if len(tokens) < len(required_fields_list):
-            err_description = 'number of fields for tag "{}"'.format(tag)
-            self.buildError([], [tag] + tokens, [], err_description)
+            self.buildError([], [tag] + tokens, [], 'number of fields for tag "{}"'.format(tag))
         else:
             # Parse required fields
             for index, (token, (regexp, description)) in enumerate(zip(tokens, required_fields_list)):
@@ -42,9 +46,6 @@ class LineParser:
                     self.buildError([tag] + tokens[:index], token, tokens[index + 1:], description)
 
     def parseOptionalFields(self, tag, tokens, parsing_dict):
-        # Check if line is valid so far
-        if self.parsingError is not None:
-            return
         # Get all fields
         optional_fields_dict = parsing_dict[tag]['optional']
         offset = len(parsing_dict[tag]['required'])

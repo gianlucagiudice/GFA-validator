@@ -19,7 +19,7 @@ def main():
 
 def readFile(path):
     with open(path) as file:
-        return [tweet.strip() for tweet in file.readlines()]
+        return [line.strip() for line in file.readlines()]
 
 
 if __name__ == '__main__':

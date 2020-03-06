@@ -8,8 +8,6 @@ class Parser:
         self.lines = lines
         # Parsed lines
         self.parsedLines = []
-        # Parsing dict
-        self.parsingDict = parsingDict
 
     def parse(self):
         # Check if file contains lines
@@ -18,13 +16,9 @@ class Parser:
         # Parse header
         start_position = self.parseHeader()
         # Parse the rest of file
-        for line_number, line in enumerate(self.lines[start_position:], start_position):
-            # Create new line parser
-            parsed_line = LineParser(line_number, line)
-            # Parse line
-            parsed_line.parse(self.parsingDict)
-            # Add parsed line to list of parsed lines
-            self.parsedLines.append(parsed_line)
+        self.parsedLines = [LineParser(line_number, line).parse(parsingDict) for line_number, line in
+                            enumerate(self.lines[start_position:], start_position)]
+        # Return parsed lines
         return self.parsedLines
 
     def parseHeader(self):

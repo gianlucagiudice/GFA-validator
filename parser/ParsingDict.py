@@ -8,16 +8,16 @@ integerRegexp = '^[0-9]*$'
 # TODO: Remove unused fields
 # Optional fields dictionary
 optionalFieldsRegexp = {
-    'A': '^[!-~]$',
+    # 'A': '^[!-~]$',
     'i': '^[-+]?[0-9]+$',
-    'f': '^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$',
+    # 'f': '^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$',
     'Z': '^[ !-~]+$',
-    'J': '^[ !-~]+$',
+    # 'J': '^[ !-~]+$',
     'H': '^[0-9A-F]+$',
-    'B': '^[cCsSiIf](,[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)+$'
+    # 'B': '^[cCsSiIf](,[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)+$'
 }
 
-# Optional fields
+# Optional fields -> tag:type:value
 optionalFields = {
     'LN': ('i', optionalFieldsRegexp['i'], 'Segment length'),
     'RC': ('i', optionalFieldsRegexp['i'], 'Read count'),
