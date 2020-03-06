@@ -4,5 +4,4 @@ The purpose of the GFA file validator is to validate GFA files `.gfa`, and detec
 The GFA format is a tab-delimited text format describing a set of sequences and their overlap. 
 
 ## Version
-python3.8
-
+python3.7
