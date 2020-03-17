@@ -5,19 +5,14 @@ cigarRegexp = '^\*|(([0-9]+[MIDNSHPX=]),?)+$'
 sequenceRegexp = '^(([ACTG]*)|(\*))$'
 integerRegexp = '^[0-9]*$'
 
-# TODO: Remove unused fields
 # Optional fields dictionary
 optionalFieldsRegexp = {
-    # 'A': '^[!-~]$',
     'i': '^[-+]?[0-9]+$',
-    # 'f': '^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$',
     'Z': '^[ !-~]+$',
-    # 'J': '^[ !-~]+$',
     'H': '^[0-9A-F]+$',
-    # 'B': '^[cCsSiIf](,[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)+$'
 }
 
-# Optional fields -> tag:type:value
+# Optional fields -> GFA format is (tag:type:value) [RC:i:51170]
 optionalFields = {
     'LN': ('i', optionalFieldsRegexp['i'], 'Segment length'),
     'RC': ('i', optionalFieldsRegexp['i'], 'Read count'),

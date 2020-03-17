@@ -19,23 +19,23 @@ class LineParser:
         if len(self.line) == 0:
             return self
         # Extract tag and tokens
-        tag, *tokens = self.line.split('\t')
+        record_tag, *tokens = self.line.split('\t')
         # Check if tag is valid
-        if tag not in parsing_dict.keys():
-            self.buildError([], tag, tokens, 'record type')
+        if record_tag not in parsing_dict.keys():
+            self.buildError([], record_tag, tokens, 'record type')
             return self
         # Parse required fields
-        self.parseRequiredFields(tag, tokens, parsing_dict)
+        self.parseRequiredFields(record_tag, tokens, parsing_dict)
         # Check if line is valid so far
         if self.parsingError is None:
             # Parse optional fields
-            self.parseOptionalFields(tag, tokens, parsing_dict)
+            self.parseOptionalFields(record_tag, tokens, parsing_dict)
         # Return parsed line
         return self
 
     def parseRequiredFields(self, tag, tokens, parsing_dict):
         required_fields_list = parsing_dict[tag]['required']
-        # Check if all required fields are present
+        # Check if all required fields occurrence
         if len(tokens) < len(required_fields_list):
             self.buildError([], [tag] + tokens, [], 'number of fields for tag "{}"'.format(tag))
         else:

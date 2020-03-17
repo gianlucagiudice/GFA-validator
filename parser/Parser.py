@@ -16,8 +16,8 @@ class Parser:
         # Parse header
         start_position = self.parseHeader()
         # Parse the rest of file
-        self.parsedLines = [LineParser(line_number, line).parse(parsingDict) for line_number, line in
-                            enumerate(self.lines[start_position:], start_position)]
+        self.parsedLines = [LineParser(line_number, line).parse(parsingDict)
+                            for line_number, line in enumerate(self.lines[start_position:], start_position)]
         # Return parsed lines
         return self.parsedLines
 
