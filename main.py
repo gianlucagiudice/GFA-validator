@@ -5,7 +5,7 @@ from parser.Parser import Parser
 
 def main():
     # Get file name
-    file_name = parseFileName(sys.argv)
+    file_name = parseArguments(sys.argv)
     # Read file
     lines = readFile(file_name)
     # Create parser object
@@ -21,7 +21,7 @@ def main():
         print("File is not valid.")
 
 
-def parseFileName(args):
+def parseArguments(args):
     if len(args) != 2:
         print("ERROR: Invalid number of arguments.")
         quit(-1)
